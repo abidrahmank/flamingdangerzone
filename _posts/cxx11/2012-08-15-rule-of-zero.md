@@ -138,7 +138,7 @@ function.
 One option would be to implement a class that follows the rule of three (or
 five).
 
-{% highlight cpp %}
+```cpp
 class module {
 public:
     explicit module(std::wstring const& name)
@@ -169,12 +169,12 @@ public:
 private:
     HMODULE handle;
 };
-{% endhighlight %}
+```
 
 But why would anyone want to do that when you can just grab an existing reusable
 ownership policy instead and get the same effect?
 
-{% highlight cpp %}
+```cpp
 class module {
 public:
     explicit module(std::wstring const& name)
@@ -187,7 +187,7 @@ private:
 
     module_handle handle;
 };
-{% endhighlight %}
+```
 
 Believe it or not, this does exactly the same thing as the first version, but
 all lifetime members have been implicitly defined by the compiler. This has
@@ -202,7 +202,7 @@ several advantages:
 To illustrate the last bullet, consider a class that owns two resources. How
 would the constructor be written in an exception-safe manner?
 
-{% highlight cpp %}
+```cpp
 struct something {
     something()
     : resource_one { new foo }
@@ -212,7 +212,7 @@ struct something {
     foo* resource_one;
     foo* resource_two;
 };
-{% endhighlight %}
+```
 
 If the construction of `resource_two` throws, the `resource_one` needs to be
 cleaned up. This can certainly be done, but it further complicates the code and
